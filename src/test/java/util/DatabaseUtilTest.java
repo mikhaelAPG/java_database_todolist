@@ -7,14 +7,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DatabaseUtilTest {
-    @Test
-    void testConnection() throws SQLException {
-        HikariDataSource dataSource = DatabaseUtil.getDataSource();
 
-        Connection connection = dataSource.getConnection();
+  @Test
+  void testConnection() throws SQLException {
+    HikariDataSource dataSource = DatabaseUtil.getDataSource();
 
-        connection.close();
+    Connection connection = dataSource.getConnection();
 
-        dataSource.close();
-    }
+    connection.close();
+
+    dataSource.close();
+  }
 }

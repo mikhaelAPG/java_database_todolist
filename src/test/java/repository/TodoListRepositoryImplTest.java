@@ -1,54 +1,56 @@
 package repository;
 
 import com.zaxxer.hikari.HikariDataSource;
-import entity.TodoList;
+import entity.Todolist;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.DatabaseUtil;
 
-public class TodoListRepositoryImplTest {
+import javax.sql.DataSource;
 
-    private HikariDataSource dataSource;
+public class TodolistRepositoryImplTest {
 
-    private TodoListRepository todoListRepository;
+  private HikariDataSource dataSource;
 
-    @BeforeEach
-    void setUp() {
-        dataSource = DatabaseUtil.getDataSource();
-        todoListRepository = new TodoListRepositoryImpl(dataSource);
+  private TodoListRepository todoListRepository;
+
+  @BeforeEach
+  void setUp() {
+    dataSource = DatabaseUtil.getDataSource();
+    todoListRepository = new TodoListRepositoryImpl(dataSource);
+  }
+
+  @Test
+  void testAdd() {
+    Todolist todolist = new Todolist();
+    todolist.setTodo("Kurniawan");
+
+    todoListRepository.add(todolist);
+  }
+
+  @Test
+  void testRemove() {
+    System.out.println(todoListRepository.remove(1));
+    System.out.println(todoListRepository.remove(2));
+    System.out.println(todoListRepository.remove(3));
+    System.out.println(todoListRepository.remove(4));
+  }
+
+  @Test
+  void testGetAll() {
+    todoListRepository.add(new Todolist("EKo"));
+    todoListRepository.add(new Todolist("Kurniawan"));
+    todoListRepository.add(new Todolist("Khannedy"));
+
+    Todolist[] todolists = todoListRepository.getAll();
+    for (var todo : todolists) {
+      System.out.println(todo.getId() + " : " + todo.getTodo());
     }
+  }
 
-    @Test
-    void testAdd() {
-        TodoList todoList = new TodoList();
-        todoList.setTodo("Kurniawan");
-
-        todoListRepository.add(todoList);
-    }
-
-    @Test
-    void testRemove() {
-        System.out.println( todoListRepository.remove(1));
-        System.out.println(todoListRepository.remove(2));
-        System.out.println( todoListRepository.remove(3));
-        System.out.println( todoListRepository.remove(4));
-    }
-
-    @Test
-    void testGetAll() {
-        todoListRepository.add(new TodoList("Eko"));
-        todoListRepository.add(new TodoList("Kurniawan"));
-        todoListRepository.add(new TodoList("Khannedy"));
-
-        TodoList[] todoLists = todoListRepository.getAll();
-        for (var todo : todoLists){
-            System.out.println(todo.getId() + " : " + todo.getTodo());
-        }
-    }
-
-    @AfterEach
-    void tearDown() {
-        dataSource.close();
-    }
+  @AfterEach
+  void tearDown() {
+    dataSource.close();
+  }
 }

@@ -1,10 +1,11 @@
 package service;
 
 public interface TodoListService {
-    // create service
-    void showTodoList();
 
-    void addTodoList(String todo);
+  void showTodoList();
 
-    void removeTodoList(Integer number);
+  void addTodoList(String todo);
+
+  void removeTodoList(Integer number);
+
 }
