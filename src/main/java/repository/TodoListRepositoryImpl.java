@@ -48,7 +48,6 @@ public class TodoListRepositoryImpl implements TodoListRepository {
 
     @Override
     public void add(TodoList todoList) {
-     // menambah todolist
      String sql = "INSERT INTO todolist(todo) VALUES (?)";
 
      try(Connection connection = dataSource.getConnection();
